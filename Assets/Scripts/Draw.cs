@@ -6,6 +6,8 @@ public class Draw : MonoBehaviour
 {
     public GameObject spacePenPoint;
     public GameObject surfacePenPoint;
+
+    public GameObject handPenPoint;
     public GameObject stroke;
     public bool mouseLookTesting;
 
@@ -39,13 +41,23 @@ public class Draw : MonoBehaviour
 
             surfacePenPoint.GetComponent<MeshRenderer>().enabled = true;
             spacePenPoint.GetComponent<MeshRenderer>().enabled = false;
+            handPenPoint.GetComponent<MeshRenderer>().enabled = false;
+        }
+        else if (PenManager.drawingWithHand)
+        {
+            penPoint = handPenPoint.transform;
+
+            surfacePenPoint.GetComponent<MeshRenderer>().enabled = false;
+            spacePenPoint.GetComponent<MeshRenderer>().enabled = false;
+            handPenPoint.GetComponent<MeshRenderer>().enabled = true;
         }
         else
         {
-            penPoint = spacePenPoint.transform;
+            penPoint = handPenPoint.transform;
 
             surfacePenPoint.GetComponent<MeshRenderer>().enabled = false;
             spacePenPoint.GetComponent<MeshRenderer>().enabled = true;
+            handPenPoint.GetComponent<MeshRenderer>().enabled = false;
         }
     }
 
